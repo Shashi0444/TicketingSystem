@@ -18,8 +18,10 @@ jobs:
 
       - name: Set up Node.js version
         uses: actions/setup-node@v1
+        env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
         with:
-          node-version: '16'
+          node-version: '16.x'
 
       - name: npm install, build, and test
         run: |
@@ -39,7 +41,7 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
